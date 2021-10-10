@@ -15,6 +15,14 @@ var app = express();
 
 require('dotenv').config()
 
+const mongoose = require('mongoose');
+
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect(process.env.DB_CONNECTION);
+}
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
