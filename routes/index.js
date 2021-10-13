@@ -1,15 +1,23 @@
 var express = require('express');
 var router = express.Router();
-const User = require("../models/User");
+const Team = require("../models/Team");
+
+// Just for testing
+const rand = () => Math.random(0).toString(36).substr(2);
+const token = (length) => (rand() + rand() + rand() + rand()).substr(0, length);
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
 
-  const user = new User({ name: "Hassan" });
+  const team = await Team.findById('6166250e9ed47e549707836c')
 
-  await user.save();
+  team.projects.push({
+    token: token(60)
+  });
 
-  res.json(user);
+  await team.save();
+
+  res.json(team);
 });
 
 module.exports = router;
