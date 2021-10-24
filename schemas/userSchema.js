@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
 
 module.exports = new Schema({
-    name: String
-});
+    name: { type: String, required: true }
+}, { timestamps: true });
