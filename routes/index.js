@@ -9,8 +9,11 @@ const token = (length) => (rand() + rand() + rand() + rand()).substr(0, length);
 /* GET home page. */
 router.get('/', async function (req, res, next) {
 
-  const team = await Team.findById('6166250e9ed47e549707836c')
+  let team = await Team.findOne({ name: 'Alpha' });
 
+  if (!team)
+    team = new Team({ name: 'Alpha' });
+  
   team.projects.push({
     token: token(60)
   });
